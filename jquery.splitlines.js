@@ -87,10 +87,19 @@
 		}		
 		this.append(tempLine);
 		var words = settings.keepHtml ? _splitHtmlWords(contents) : _splitWords(text);
+		var prev;
 		for (var w=0; w<words.length; w++) {
 			var html = tempLine.html();
 			tempLine.html(html+words[w]+' ');
+			if (tempLine.html() == prev) {
+				// repeating word, it will never fit so just use it instead of failing
+				prev = '';
+				newHtml.append('<'+settings.tag+'>'+tempLine.html()+'</'+settings.tag+'>');
+				tempLine.html('');
+				continue;
+			}
 			if (tempLine.height() > maxHeight) {
+				prev = tempLine.html();
 				tempLine.html(html);
 				newHtml.append('<'+settings.tag+'>'+tempLine.html()+'</'+settings.tag+'>');
 				tempLine.html('');

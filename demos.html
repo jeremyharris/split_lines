@@ -80,6 +80,7 @@
 				$('#example-5').splitLines({width: 200});
 				$('#example-6').splitLines();
 				$('#example-7').splitLines({tag:'span',width: 120});
+				$('#example-8').splitLines({width: 10});
 
 				$('#example-6').css('height', 24).children().css({
 					position: 'absolute',
@@ -171,6 +172,12 @@
 					<p>Another animation example</p>
 					<div id="example-7">
 						And a sliding example using <span class="code">splitLines()</span> to split into equal chunks! Isn't it neat?
+					</div>
+				</div>
+				<div>
+					<p>A test for using a width that's entirely too small</p>
+					<div id="example-8" class="example">
+						Long words will not fit into small widths!
 					</div>
 				</div>
 			</div>
