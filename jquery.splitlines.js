@@ -34,8 +34,8 @@
 		var words = [];
 		var splitContent;
 		for (var c=0; c<contents.length; c++) {
-			if (contents[c].nodeType == 3) {				
-				splitContent = _splitWords(contents[c].textContent);
+			if (contents[c].nodeType == 3) {
+				splitContent = _splitWords(contents[c].textContent || contents[c].toString());
 			} else {
 				var tag = $(contents[c]).clone();
 				splitContent = _splitHtmlWords(tag.contents());				
@@ -43,8 +43,8 @@
 					tag.empty();
 					splitContent[tagless] = tag.html(splitContent[tagless]).wrap('<p></p>').parent().html();
 				}				
-			}			
-			for (word in splitContent) {
+			}
+			for (var word in splitContent) {
 				words.push(splitContent[word]);
 			}
 		}
