@@ -10,6 +10,7 @@
  *	 the element. Default is true
  *
  *	@param options object The options object
+ *	@license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 (function($){
 
