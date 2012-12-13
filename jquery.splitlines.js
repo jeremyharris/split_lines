@@ -62,6 +62,25 @@
 	}
 
 /**
+ * Formats html with tags and wrappers
+ *
+ * @param string text The text to split
+ */
+	function _markupContent(tag, wrap, html) {
+        var tagOpen   = '<'  + tag + '>' ,
+            tagClose  = '</' + tag + '>' ,
+            wrapOpen  = wrap ? '<'  + wrap + '>' : '' ,
+            wrapClose = wrap ? '</' + wrap + '>' : '' ;
+
+        console.log(html, wrapOpen);
+		return [
+            tagOpen , 
+                wrapOpen , html, wrapClose ,
+            tagClose
+        ].join('');
+	}
+
+/**
  * The jQuery plugin function. See the top of this file for information on the
  * options
  */
