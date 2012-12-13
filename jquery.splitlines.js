@@ -72,7 +72,6 @@
             wrapOpen  = wrap ? '<'  + wrap + '>' : '' ,
             wrapClose = wrap ? '</' + wrap + '>' : '' ;
 
-        console.log(html, wrapOpen);
 		return [
             tagOpen , 
                 wrapOpen , html, wrapClose ,
