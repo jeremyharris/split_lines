@@ -69,6 +69,7 @@
 		var settings = {
 			width: 'auto',
 			tag: 'div',
+			wrap: '',
 			keepHtml: true
 		};
 		if (options) 
