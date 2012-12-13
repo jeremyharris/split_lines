@@ -115,19 +115,19 @@
 			if (tempLine.html() == prev) {
 				// repeating word, it will never fit so just use it instead of failing
 				prev = '';
-				newHtml.append('<'+settings.tag+'>'+tempLine.html()+'</'+settings.tag+'>');
+				newHtml.append( _markupContent(settings.tag, settings.wrap, tempLine.html() ) );
 				tempLine.html('');
 				continue;
 			}
 			if (tempLine.height() > maxHeight) {
 				prev = tempLine.html();
 				tempLine.html(html);
-				newHtml.append('<'+settings.tag+'>'+tempLine.html()+'</'+settings.tag+'>');
+				newHtml.append( _markupContent(settings.tag, settings.wrap, tempLine.html() ) );
 				tempLine.html('');
 				w--;
 			}
 		}
-		newHtml.append('<'+settings.tag+'>'+tempLine.html()+'</'+settings.tag+'>');
+		newHtml.append( _markupContent(settings.tag, settings.wrap, tempLine.html() ) );
 
 		this.html(newHtml.html());
 
