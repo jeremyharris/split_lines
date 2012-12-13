@@ -71,9 +71,9 @@
 			tag: 'div',
 			keepHtml: true
 		};
-		if (options) {
+		if (options) 
 			$.extend(settings, options);
-      }
+
 		var newHtml = _createTemp(this);
 		var contents = this.contents();
 		var text = this.text();
