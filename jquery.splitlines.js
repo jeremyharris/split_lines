@@ -62,21 +62,17 @@
 	}
 
 /**
- * Formats html with tags and wrappers
+ * Formats html with tags and wrappers.
  *
  * @param string text The text to split
  */
-	function _markupContent(tag, wrap, html) {
-        var tagOpen   = '<'  + tag + '>' ,
-            tagClose  = '</' + tag + '>' ,
-            wrapOpen  = wrap ? '<'  + wrap + '>' : '' ,
-            wrapClose = wrap ? '</' + wrap + '>' : '' ;
-
-		return [
-            tagOpen , 
-                wrapOpen , html, wrapClose ,
-            tagClose
-        ].join('');
+	function _markupContent(tag, html) {
+		// find the deepest child, add html, then find the parent
+		return $(tag)
+			.find('*:not(:has("*"))')
+			.html(html) 
+			.parentsUntil()
+			.slice(-1);
 	}
 
 /**
@@ -114,19 +110,19 @@
 			if (tempLine.html() == prev) {
 				// repeating word, it will never fit so just use it instead of failing
 				prev = '';
-				newHtml.append( _markupContent(settings.tag, settings.wrap, tempLine.html() ) );
+				newHtml.append(_markupContent(settings.tag, tempLine.html()));
 				tempLine.html('');
 				continue;
 			}
 			if (tempLine.height() > maxHeight) {
 				prev = tempLine.html();
 				tempLine.html(html);
-				newHtml.append( _markupContent(settings.tag, settings.wrap, tempLine.html() ) );
+				newHtml.append(_markupContent(settings.tag, tempLine.html()));
 				tempLine.html('');
 				w--;
 			}
 		}
-		newHtml.append( _markupContent(settings.tag, settings.wrap, tempLine.html() ) );
+		newHtml.append(_markupContent(settings.tag, tempLine.html()));
 
 		this.html(newHtml.html());
 
