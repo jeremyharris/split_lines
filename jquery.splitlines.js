@@ -82,7 +82,7 @@
 	$.fn.splitLines = function(options) {
 		var settings = {
 			width: 'auto',
-			tag: 'div',
+			tag: '<div>',
 			wrap: '',
 			keepHtml: true
 		};
