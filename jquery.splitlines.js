@@ -75,15 +75,19 @@
 /**
  * Formats html with tags and wrappers.
  *
- * @param string text The text to split
+ * @param tag
+ * @param html content wrapped by the tag
  */
 	function _markupContent(tag, html) {
+		// wrap in a temp div so .html() gives us the tags we specify
+		tag = '<div>' + tag;
 		// find the deepest child, add html, then find the parent
 		return $(tag)
 			.find('*:not(:has("*"))')
 			.html(html) 
 			.parentsUntil()
-			.slice(-1);
+			.slice(-1)
+			.html();
 	}
 
 /**
