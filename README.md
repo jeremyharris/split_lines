@@ -20,8 +20,7 @@ line individually. Works with nested HTML tags.
 ### Javascript
 
     $('#mytext').splitLines({
-        tag: 'div',
-        wrap: 'span',
+        tag: '<div><span class="someClass">',
         width: 200,
         keepHtml: true
     });
@@ -29,12 +28,12 @@ line individually. Works with nested HTML tags.
 ### Result
 
     <div id="mytext">
-        <div><span>This is an</span></div>
-        <div><span><strong>example</strong> of</span></div>
-        <div><span>some long</span></div>
-        <div><span>text that we</span></div>
-        <div><span>want to split</span></div>
-        <div><span>into lines.</span></div>
+        <div><span class="someClass">This is an</span></div>
+        <div><span class="someClass"><strong>example</strong> of</span></div>
+        <div><span class="someClass">some long</span></div>
+        <div><span class="someClass">text that we</span></div>
+        <div><span class="someClass">want to split</span></div>
+        <div><span class="someClass">into lines.</span></div>
     </div>
 
 Now go forth, and animate!
