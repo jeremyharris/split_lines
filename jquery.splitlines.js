@@ -62,18 +62,49 @@
 	}
 
 /**
+ * Checks the tag to make sure it contains tags
+ *
+ * @param tag
+ */
+	function _checkTags(tag) {
+		if(!tag.match(/<|>/))
+			return ['<', tag, '>'].join('');
+		return tag;
+	}
+
+/**
+ * Formats html with tags and wrappers.
+ *
+ * @param tag
+ * @param html content wrapped by the tag
+ */
+	function _markupContent(tag, html) {
+		// wrap in a temp div so .html() gives us the tags we specify
+		tag = '<div>' + tag;
+		// find the deepest child, add html, then find the parent
+		return $(tag)
+			.find('*:not(:has("*"))')
+			.html(html) 
+			.parentsUntil()
+			.slice(-1)
+			.html();
+	}
+
+/**
  * The jQuery plugin function. See the top of this file for information on the
  * options
  */
 	$.fn.splitLines = function(options) {
 		var settings = {
 			width: 'auto',
-			tag: 'div',
+			tag: '<div>',
+			wrap: '',
 			keepHtml: true
 		};
-		if (options) {
+		if (options) 
 			$.extend(settings, options);
-      }
+
+		settings.tag = _checkTags(settings.tag);
 		var newHtml = _createTemp(this);
 		var contents = this.contents();
 		var text = this.text();
@@ -95,19 +126,19 @@
 			if (tempLine.html() == prev) {
 				// repeating word, it will never fit so just use it instead of failing
 				prev = '';
-				newHtml.append('<'+settings.tag+'>'+tempLine.html()+'</'+settings.tag+'>');
+				newHtml.append(_markupContent(settings.tag, tempLine.html()));
 				tempLine.html('');
 				continue;
 			}
 			if (tempLine.height() > maxHeight) {
 				prev = tempLine.html();
 				tempLine.html(html);
-				newHtml.append('<'+settings.tag+'>'+tempLine.html()+'</'+settings.tag+'>');
+				newHtml.append(_markupContent(settings.tag, tempLine.html()));
 				tempLine.html('');
 				w--;
 			}
 		}
-		newHtml.append('<'+settings.tag+'>'+tempLine.html()+'</'+settings.tag+'>');
+		newHtml.append(_markupContent(settings.tag, tempLine.html()));
 
 		this.html(newHtml.html());
 
