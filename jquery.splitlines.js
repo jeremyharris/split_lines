@@ -101,9 +101,9 @@
 			wrap: '',
 			keepHtml: true
 		};
-		if (options) 
+		if (options) {
 			$.extend(settings, options);
-
+		}
 		settings.tag = _checkTags(settings.tag);
 		var newHtml = _createTemp(this);
 		var contents = this.contents();
