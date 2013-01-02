@@ -62,17 +62,6 @@
 	}
 
 /**
- * Checks the tag to make sure it contains tags
- *
- * @param tag
- */
-	function _checkTags(tag) {
-		if(!tag.match(/<|>/))
-			return ['<', tag, '>'].join('');
-		return tag;
-	}
-
-/**
  * Formats html with tags and wrappers.
  *
  * @param tag
@@ -104,7 +93,6 @@
 		if (options) {
 			$.extend(settings, options);
 		}
-		settings.tag = _checkTags(settings.tag);
 		var newHtml = _createTemp(this);
 		var contents = this.contents();
 		var text = this.text();
