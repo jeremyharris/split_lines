@@ -39,14 +39,14 @@
 				splitContent = _splitWords(contents[c].textContent || contents[c].toString());
 			} else {
 				var tag = $(contents[c]).clone();
-				splitContent = _splitHtmlWords(tag.contents());				
-				for (var tagless in splitContent) {
+				splitContent = _splitHtmlWords(tag.contents());
+				for (var t=0; t<splitContent.length; t++) {
 					tag.empty();
-					splitContent[tagless] = tag.html(splitContent[tagless]).wrap('<p></p>').parent().html();
-				}				
+					splitContent[t] = tag.html(splitContent[t]).wrap('<p></p>').parent().html();
+				}
 			}
-			for (var word in splitContent) {
-				words.push(splitContent[word]);
+			for (var w=0; w<splitContent.length; w++) {
+				words.push(splitContent[w]);
 			}
 		}
 		return words;
@@ -73,7 +73,7 @@
 		// find the deepest child, add html, then find the parent
 		return $(tag)
 			.find('*:not(:has("*"))')
-			.html(html) 
+			.html(html)
 			.parentsUntil()
 			.slice(-1)
 			.html();
@@ -104,7 +104,7 @@
 		var tempLine = _createTemp(newHtml);
 		if (settings.width !== 'auto') {
 			tempLine.width(settings.width);
-		}		
+		}
 		this.append(tempLine);
 		var words = settings.keepHtml ? _splitHtmlWords(contents) : _splitWords(text);
 		var prev;

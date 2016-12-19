@@ -54,6 +54,13 @@
 			}
 		</style>
 		<script type="text/javascript">
+			// see: https://github.com/jeremyharris/split_lines/issues/3
+			// if this test fails, you'll see an additional line on all examples:
+			// `function () { return 'test'; }`
+			Array.prototype.test = function () {
+				return 'test';
+			};
+
 			function cycleFade() {
 				var div = $('#example-6');
 				$(div).children('div:first').animate({opacity:0}, 'slow', function() {
@@ -93,7 +100,7 @@
 					overflow: 'hidden'
 				}); //.children().css({width:100});
 				$('#example-7').children(':first').show();
-				
+
 				setInterval('cycleFade()', 2000);
 				setInterval('cycleSlide()', 2000);
 			});
