@@ -87,6 +87,7 @@
 				$('#example-6').splitLines();
 				$('#example-7').splitLines({tag:'<span>',width: 120});
 				$('#example-8').splitLines({width: 10});
+				$('#example-9').splitLines({width: 150});
 
 				$('#example-6').css('height', 24).children().css({
 					position: 'absolute',
@@ -184,6 +185,14 @@
 					<p>A test for using a width that's entirely too small</p>
 					<div id="example-8" class="example">
 						Long words will not fit into small widths!
+					</div>
+				</div>
+
+				<div>
+					<p>A test for preserving <code>&lt;br&gt;</code> tags.</p>
+					<div id="example-9" class="example">
+						Broken up <br/> with html line <br> breaks but still with split lines.
+						How about <span>words in tags<br/> with brs!</span>
 					</div>
 				</div>
 			</div>
