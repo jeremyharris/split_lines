@@ -35,6 +35,10 @@
 		var words = [];
 		var splitContent;
 		for (var c=0; c<contents.length; c++) {
+			if (contents[c].nodeName === 'BR') {
+				words.push('<br>');
+				continue;
+			}
 			if (contents[c].nodeType == 3) {
 				splitContent = _splitWords(contents[c].textContent || contents[c].toString());
 			} else {
@@ -46,6 +50,9 @@
 				}
 			}
 			for (var w=0; w<splitContent.length; w++) {
+				if (splitContent[w] === '') {
+					continue;
+				}
 				words.push(splitContent[w]);
 			}
 		}
