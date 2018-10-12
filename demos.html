@@ -48,6 +48,14 @@
 				line-height: 24px;
 				width:300px;
 			}
+			#original-10, #example-10 {
+				max-width: 300px;
+			}
+			#original-10 p, #example-10 p {
+				font-family: sans-serif;
+				font-size: 14px;
+			}
+
 			.code {
 				font-family: monospace;
 				display:inline;
@@ -88,6 +96,7 @@
 				$('#example-7').splitLines({tag:'<span>',width: 120});
 				$('#example-8').splitLines({width: 10});
 				$('#example-9').splitLines({width: 150});
+				$('#example-10 p').splitLines({tag:'<span style="display:inline-block;">'});
 
 				$('#example-6').css('height', 24).children().css({
 					position: 'absolute',
@@ -193,6 +202,16 @@
 					<div id="example-9" class="example">
 						Broken up <br/> with html line <br> breaks but still with split lines.
 						How about <span>words in tags<br/> with brs!</span>
+					</div>
+				</div>
+
+				<div>
+					<p>A test using the width of an outer container</p>
+					<div id="original-10" class="original">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est libero, eget convallis mauris viverra eu. Fusce erat urna, blandit sed ex sit amet, sollicitudin pellentesque ex.</p>
+					</div>
+					<div id="example-10" class="example">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est libero, eget convallis mauris viverra eu. Fusce erat urna, blandit sed ex sit amet, sollicitudin pellentesque ex.</p>
 					</div>
 				</div>
 			</div>

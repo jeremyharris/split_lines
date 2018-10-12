@@ -109,9 +109,11 @@
 		newHtml.empty();
 
 		var tempLine = _createTemp(newHtml);
-		if (settings.width !== 'auto') {
-			tempLine.width(settings.width);
+		var width = settings.width;
+		if (settings.width === 'auto') {
+			width = this[0].offsetWidth;
 		}
+		tempLine.width(width);
 		this.append(tempLine);
 		var words = settings.keepHtml ? _splitHtmlWords(contents) : _splitWords(text);
 		var prev;
