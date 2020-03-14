@@ -74,7 +74,7 @@
  * @param tag
  * @param html content wrapped by the tag
  */
-	function _markupContent(tag, html) {
+	function _markupContent(tag, html, line) {
 		// wrap in a temp div so .html() gives us the tags we specify
 		tag = '<div>' + tag;
 		// find the deepest child, add html, then find the parent
@@ -82,6 +82,7 @@
 			.find('*:not(:has("*"))')
 			.html(html)
 			.parentsUntil()
+			.css('--line-index', line)
 			.slice(-1)
 			.html();
 	}
@@ -117,25 +118,27 @@
 		this.append(tempLine);
 		var words = settings.keepHtml ? _splitHtmlWords(contents) : _splitWords(text);
 		var prev;
+		var lineCount = 0;
 		for (var w=0; w<words.length; w++) {
 			var html = tempLine.html();
 			tempLine.html(html+words[w]+' ');
 			if (tempLine.html() == prev) {
 				// repeating word, it will never fit so just use it instead of failing
 				prev = '';
-				newHtml.append(_markupContent(settings.tag, tempLine.html()));
+				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount)));
 				tempLine.html('');
 				continue;
 			}
 			if (tempLine.height() > maxHeight) {
 				prev = tempLine.html();
 				tempLine.html(html);
-				newHtml.append(_markupContent(settings.tag, tempLine.html()));
+				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount)));
 				tempLine.html('');
 				w--;
+				lineCount++;
 			}
 		}
-		newHtml.append(_markupContent(settings.tag, tempLine.html()));
+		newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount)));
 
 		this.html(newHtml.html());
 
