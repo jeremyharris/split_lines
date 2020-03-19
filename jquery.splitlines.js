@@ -125,20 +125,20 @@
 			if (tempLine.html() == prev) {
 				// repeating word, it will never fit so just use it instead of failing
 				prev = '';
-				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount)));
+				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
 				tempLine.html('');
 				continue;
 			}
 			if (tempLine.height() > maxHeight) {
 				prev = tempLine.html();
 				tempLine.html(html);
-				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount)));
+				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
 				tempLine.html('');
 				w--;
 				lineCount++;
 			}
 		}
-		newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount)));
+		newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
 
 		this.html(newHtml.html());
 
