@@ -73,18 +73,23 @@
  *
  * @param tag
  * @param html content wrapped by the tag
+ * @param line Current line index
  */
 	function _markupContent(tag, html, line) {
 		// wrap in a temp div so .html() gives us the tags we specify
-		tag = '<div>' + tag;
+		tag = '<div class="stop">' + tag;
 		// find the deepest child, add html, then find the parent
-		return $(tag)
+		var $outer = $(tag)
 			.find('*:not(:has("*"))')
 			.html(html)
-			.parentsUntil()
-			.css('--line-index', line)
-			.slice(-1)
-			.html();
+			.closest('.stop')
+			.slice(-1);
+
+		$outer
+			.children()
+			.css('--line-index', line);
+
+		return $outer.html();
 	}
 
 /**
