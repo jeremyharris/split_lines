@@ -10,6 +10,7 @@
 				font-family: 'Lucida Sans', Helvetica, Arial, sans-serif;
 				margin-left:20px;
 				margin-top:20px;
+				margin-bottom: 100px;
 			}
 			h1 {
 				font-size: 30px;
@@ -56,6 +57,9 @@
 				font-size: 14px;
 			}
 			#original-11, #example-11 {
+				max-width: 300px;
+			}
+			#original-12, #example-12 {
 				max-width: 300px;
 			}
 
@@ -117,6 +121,9 @@
 				$('#example-9').splitLines({width: 150});
 				$('#example-10 p').splitLines({tag:'<span style="display:inline-block;">'});
 				$('#example-11').splitLines({
+					tag: '<div class="animated-line-content">'
+				});
+				$('#example-12').splitLines({
 					tag: '<div class="animated-line-wrapper"><div class="animated-line-content">'
 				});
 
@@ -243,6 +250,16 @@
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est libero, eget convallis mauris viverra eu.
 					</div>
 					<div id="example-11" class="example">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est libero, eget convallis mauris viverra eu.
+					</div>
+				</div>
+
+				<div>
+					<p>A test using <code>--line-index</code> CSS variable and extra tag wrappers to animate lines.</p>
+					<div id="original-12" class="original">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est libero, eget convallis mauris viverra eu.
+					</div>
+					<div id="example-12" class="example">
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est libero, eget convallis mauris viverra eu.
 					</div>
 				</div>
