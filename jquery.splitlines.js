@@ -85,9 +85,10 @@
 			.closest('.stop')
 			.slice(-1);
 
-		$outer
-			.children()
-			.css('--line-index', index);
+		// jQuery does not support setting CSS vars until 3.2, so manually set them
+		$outer.children().each(function (i, element) {
+			element.style.setProperty('--line-index', index);
+		});
 
 		return $outer.html();
 	}
