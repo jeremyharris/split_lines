@@ -73,9 +73,9 @@
  *
  * @param tag
  * @param html content wrapped by the tag
- * @param line Current line index
+ * @param index Current line index
  */
-	function _markupContent(tag, html, line) {
+	function _markupContent(tag, html, index) {
 		// wrap in a temp div so .html() gives us the tags we specify
 		tag = '<div class="stop">' + tag;
 		// find the deepest child, add html, then find the parent
@@ -87,7 +87,7 @@
 
 		$outer
 			.children()
-			.css('--line-index', line);
+			.css('--line-index', index);
 
 		return $outer.html();
 	}
