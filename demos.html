@@ -3,7 +3,7 @@
 	<head>
 		<title></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="jquery.splitlines.js"></script>
 		<style type="text/css">
 			body {
@@ -55,10 +55,29 @@
 				font-family: sans-serif;
 				font-size: 14px;
 			}
+			#original-11, #example-11 {
+				max-width: 300px;
+			}
 
 			.code {
 				font-family: monospace;
 				display:inline;
+			}
+
+			.animated-line-content {
+				opacity: 0;
+				animation: animtext-up .75s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+				animation-delay: calc(.15s * var(--line-index));
+			}
+			@keyframes animtext-up {
+				from {
+					transform: translateY(100%);
+					opacity: 0;
+				}
+				to {
+					transform: translateY(0);
+					opacity: 1;
+				}
 			}
 		</style>
 		<script type="text/javascript">
@@ -97,6 +116,9 @@
 				$('#example-8').splitLines({width: 10});
 				$('#example-9').splitLines({width: 150});
 				$('#example-10 p').splitLines({tag:'<span style="display:inline-block;">'});
+				$('#example-11').splitLines({
+					tag: '<div class="animated-line-wrapper"><div class="animated-line-content">'
+				});
 
 				$('#example-6').css('height', 24).children().css({
 					position: 'absolute',
@@ -212,6 +234,16 @@
 					</div>
 					<div id="example-10" class="example">
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est libero, eget convallis mauris viverra eu. Fusce erat urna, blandit sed ex sit amet, sollicitudin pellentesque ex.</p>
+					</div>
+				</div>
+
+				<div>
+					<p>A test using <code>--line-index</code> CSS variable to animate lines.</p>
+					<div id="original-11" class="original">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est libero, eget convallis mauris viverra eu.
+					</div>
+					<div id="example-11" class="example">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est libero, eget convallis mauris viverra eu.
 					</div>
 				</div>
 			</div>
