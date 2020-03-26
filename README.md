@@ -28,12 +28,12 @@ line individually. Works with nested HTML tags.
 ### Result
 
     <div id="mytext">
-        <div><span class="someClass">This is an</span></div>
-        <div><span class="someClass"><strong>example</strong> of</span></div>
-        <div><span class="someClass">some long</span></div>
-        <div><span class="someClass">text that we</span></div>
-        <div><span class="someClass">want to split</span></div>
-        <div><span class="someClass">into lines.</span></div>
+        <div style="--line-index:0;"><span class="someClass">This is an</span></div>
+        <div style="--line-index:1;"><span class="someClass"><strong>example</strong> of</span></div>
+        <div style="--line-index:2;"><span class="someClass">some long</span></div>
+        <div style="--line-index:3;"><span class="someClass">text that we</span></div>
+        <div style="--line-index:4;"><span class="someClass">want to split</span></div>
+        <div style="--line-index:5;"><span class="someClass">into lines.</span></div>
     </div>
 
 Now go forth, and animate!

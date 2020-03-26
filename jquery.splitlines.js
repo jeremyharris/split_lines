@@ -73,17 +73,24 @@
  *
  * @param tag
  * @param html content wrapped by the tag
+ * @param index Current line index
  */
-	function _markupContent(tag, html) {
+	function _markupContent(tag, html, index) {
 		// wrap in a temp div so .html() gives us the tags we specify
-		tag = '<div>' + tag;
+		tag = '<div class="stop">' + tag;
 		// find the deepest child, add html, then find the parent
-		return $(tag)
+		var $outer = $(tag)
 			.find('*:not(:has("*"))')
 			.html(html)
-			.parentsUntil()
-			.slice(-1)
-			.html();
+			.closest('.stop')
+			.slice(-1);
+
+		// jQuery does not support setting CSS vars until 3.2, so manually set them
+		$outer.children().each(function (i, element) {
+			element.style.setProperty('--line-index', index);
+		});
+
+		return $outer.html();
 	}
 
 /**
@@ -117,25 +124,27 @@
 		this.append(tempLine);
 		var words = settings.keepHtml ? _splitHtmlWords(contents) : _splitWords(text);
 		var prev;
+		var lineCount = 0;
 		for (var w=0; w<words.length; w++) {
 			var html = tempLine.html();
 			tempLine.html(html+words[w]+' ');
 			if (tempLine.html() == prev) {
 				// repeating word, it will never fit so just use it instead of failing
 				prev = '';
-				newHtml.append(_markupContent(settings.tag, tempLine.html()));
+				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
 				tempLine.html('');
 				continue;
 			}
 			if (tempLine.height() > maxHeight) {
 				prev = tempLine.html();
 				tempLine.html(html);
-				newHtml.append(_markupContent(settings.tag, tempLine.html()));
+				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
 				tempLine.html('');
 				w--;
+				lineCount++;
 			}
 		}
-		newHtml.append(_markupContent(settings.tag, tempLine.html()));
+		newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
 
 		this.html(newHtml.html());
 
