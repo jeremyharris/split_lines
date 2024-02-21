@@ -13,7 +13,6 @@
  *	@license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 (function($){
-
 /**
  * Creates a temporary clone
  *
@@ -107,46 +106,56 @@
 		if (options) {
 			$.extend(settings, options);
 		}
-		var newHtml = _createTemp(this);
-		var contents = this.contents();
-		var text = this.text();
-		this.append(newHtml);
-		newHtml.text('42');
-		var maxHeight = newHtml.height()+2;
-		newHtml.empty();
 
-		var tempLine = _createTemp(newHtml);
-		var width = settings.width;
-		if (settings.width === 'auto') {
-			width = this[0].offsetWidth;
-		}
-		tempLine.width(width);
-		this.append(tempLine);
-		var words = settings.keepHtml ? _splitHtmlWords(contents) : _splitWords(text);
-		var prev;
-		var lineCount = 0;
-		for (var w=0; w<words.length; w++) {
-			var html = tempLine.html();
-			tempLine.html(html+words[w]+' ');
-			if (tempLine.html() == prev) {
-				// repeating word, it will never fit so just use it instead of failing
-				prev = '';
-				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
-				tempLine.html('');
-				continue;
+		var arr = this;
+
+		for (var index=0; index<arr.length; index++) {
+			var tmpElement = $(arr[index]);
+
+			var newHtml = _createTemp(tmpElement);
+			var contents = tmpElement.contents();
+			var text = tmpElement.text();
+			tmpElement.append(newHtml);
+			newHtml.text('42');
+			var maxHeight = newHtml.height() + 2;
+			newHtml.empty();
+
+			var tempLine = _createTemp(newHtml);
+			var width = settings.width;
+			if (settings.width === 'auto') {
+				width = tmpElement[0].offsetWidth;
 			}
-			if (tempLine.height() > maxHeight) {
-				prev = tempLine.html();
-				tempLine.html(html);
-				newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
-				tempLine.html('');
-				w--;
-				lineCount++;
+			tempLine.width(width);
+			tmpElement.append(tempLine);
+			var words = settings.keepHtml
+				? _splitHtmlWords(contents)
+				: _splitWords(text);
+			var prev;
+			var lineCount=0;
+			for (var w=0; w<words.length; w++) {
+				var html = tempLine.html();
+				tempLine.html(html+words[w]+' ');
+				if (tempLine.html() === prev) {
+					// repeating word, it will never fit so just use it instead of failing
+					prev = '';
+					newHtml.append(
+						_markupContent(settings.tag, tempLine.html(), lineCount)
+					);
+					tempLine.html('');
+					continue;
+				}
+				if (tempLine.height() > maxHeight) {
+					prev = tempLine.html();
+					tempLine.html(html);
+					newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
+					tempLine.html('');
+					w--;
+					lineCount++;
+				}
 			}
+			newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
+
+			tmpElement.html(newHtml.html());
 		}
-		newHtml.append(_markupContent(settings.tag, tempLine.html(), lineCount));
-
-		this.html(newHtml.html());
-
 	};
 })(jQuery);
