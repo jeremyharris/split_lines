@@ -134,7 +134,7 @@
 			var lineCount=0;
 			for (var w=0; w<words.length; w++) {
 				var html = tempLine.html();
-				tempLine.html('${html + words[w]} ');
+				tempLine.html(html+words[w]+' ');
 				if (tempLine.html() === prev) {
 					// repeating word, it will never fit so just use it instead of failing
 					prev = '';
